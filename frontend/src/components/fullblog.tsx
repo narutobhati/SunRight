@@ -9,6 +9,7 @@ interface blogcontent{
     publishedDate:string,
     id:string
 }
+//@ts-ignore
 export const Fullblog=({title,content,authorName,publishedDate,id}:blogcontent)=>{
     return(
         <><div className="flex justify-center mt-10 ">

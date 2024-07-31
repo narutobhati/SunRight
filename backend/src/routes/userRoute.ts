@@ -41,7 +41,7 @@ userRoute.post("/signup",async (c)=> {
         const token= await sign({id: user.id},c.env.JWT_SECRET)
         return c.json({
             jwt:token,
-            username:body.name
+            username:user.name
         })
   }catch(e){
     console.log(e)
@@ -60,7 +60,7 @@ userRoute.post("/signin",async (c)=>{
         const body=await c.req.json();
         const user =await prisma.user.findFirst({
             where:{
-                email:body.username,
+                email:body.email,
                 password:body.password
             }
         })
@@ -69,7 +69,9 @@ userRoute.post("/signin",async (c)=>{
             return c.text("user not found")
 
         }
+        console.log(user)
         const token=await sign({id:user.id},c.env.JWT_SECRET)
+        
         return c.json({
             jwt:token,
             username:user.name
